@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <windows.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 #ifndef METHODS_H
 #define METHODS_H
@@ -13,7 +15,7 @@ void clearScreen()
 #endif
 }
 
-void showGame(char game[3][3])
+void init(char game[3][3])
 {
     for (int l = 0; l < 3; l++)
     {
@@ -89,7 +91,7 @@ bool verifyWin(char player, char game[3][3])
     return false;
 }
 
-void init(char game[3][3], int player, int line, int column, int moves, int win, int play_again)
+void showGame(char game[3][3], int player, int line, int column, int moves, int win, int play_again)
 {
     do
     {
@@ -101,11 +103,11 @@ void init(char game[3][3], int player, int line, int column, int moves, int win,
                 game[x][y] = ' ';
             }
         }
-        showGame(game);
+        init(game);
         do
         {
             clearScreen();
-            showGame(game);
+            init(game);
             printf("\n\nJogador %d digite a linha e coluna que deseja jogar: ", player);
             scanf("%d%d", &line, &column);
 
@@ -128,7 +130,7 @@ void init(char game[3][3], int player, int line, int column, int moves, int win,
                     game[line][column] = 'O';
                     player = 1;
                 }
-                showGame(game);
+                init(game);
                 moves++;
                 if (verifyWin('X', game))
                 {
@@ -136,6 +138,7 @@ void init(char game[3][3], int player, int line, int column, int moves, int win,
                     printf("\n\n\n\t\t\t\t  O player 1 venceu o game!!\n\n\n");
                     Sleep(1500);
                     win = 1;
+                    break;
                 }
                 else if (verifyWin('O', game))
                 {
@@ -143,14 +146,15 @@ void init(char game[3][3], int player, int line, int column, int moves, int win,
                     printf("\n\n\n\t\t\t\t  O player 2 venceu o game!!\n\n\n");
                     Sleep(1500);
                     win = 1;
+                    break;
                 }
             }
 
+            if (moves == 9)
+            {
+                printf("\n \t\t\t\t  EMPATE!\n\n");
+            }
         } while (moves < 9 && win == 0);
-        if (moves == 9)
-        {
-            printf("\n \t\t\t\t  EMPATE!\n\n");
-        }
 
         printf("\t\tDigite 1 caso queira jogar novamente ou qualquer tecla para parar de jogar.\n");
         scanf("%d", &play_again);
