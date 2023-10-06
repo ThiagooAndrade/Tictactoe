@@ -51,7 +51,7 @@ void init(char game[3][3])
     }
 }
 
-bool verifyMove(int line, int column)
+bool checkMove(int line, int column)
 {
     if ((line < 3 && line >= 0) && (column < 3 && column >= 0))
     {
@@ -62,7 +62,7 @@ bool verifyMove(int line, int column)
     return false;
 }
 
-bool verifyWin(char player, char game[3][3])
+bool checkWin(char player, char game[3][3])
 {
     // verifica se algum player ganhou pelas horizontais
     for (int i = 0; i < 3; i++)
@@ -116,7 +116,7 @@ void showGame(char game[3][3], int player, int line, int column, int moves, int 
             line--;
             column--;
 
-            if ((verifyMove(line, column)) && (game[line][column] == ' '))
+            if ((checkMove(line, column)) && (game[line][column] == ' '))
             {
 
                 clearScreen();
@@ -132,7 +132,7 @@ void showGame(char game[3][3], int player, int line, int column, int moves, int 
                 }
                 init(game);
                 moves++;
-                if (verifyWin('X', game))
+                if (checkWin('X', game))
                 {
 
                     printf("\n\n\n\t\t\t\t  O player 1 venceu o game!!\n\n\n");
@@ -140,7 +140,7 @@ void showGame(char game[3][3], int player, int line, int column, int moves, int 
                     win = 1;
                     break;
                 }
-                else if (verifyWin('O', game))
+                else if (checkWin('O', game))
                 {
 
                     printf("\n\n\n\t\t\t\t  O player 2 venceu o game!!\n\n\n");
