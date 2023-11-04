@@ -21,8 +21,8 @@ void init(char game[3][3])
     {
         if (l == 0)
         {
-            printf("\n\t\t\t\t\t      Colunas\n\n");
-            printf("\t\t\t\t\t    1    2    3   \n\n");
+            printf("\n\t\t\t\t\t      COLUNAS\n\n");
+            printf("\t\t\t\t\t    1    2    3   \n\t\t\t\t\t\t\t\tL\n");
         }
 
         for (int c = 0; c < 3; c++)
@@ -41,10 +41,18 @@ void init(char game[3][3])
             {
                 printf("   %d", l + 1);
             }
-        }
-        if (l < 2)
-        {
-            printf("\n\t\t\t\t\t   -------------");
+            if (l == 0 && c == 2)
+            {
+                printf("    I\n\t\t\t\t\t   -------------        N");
+            }
+            if (l == 1 && c == 2)
+            {
+                printf("    H\n\t\t\t\t\t   -------------        A");
+            }
+            if (l == 2 && c == 2)
+            {
+                printf("    S");
+            }
         }
 
         printf("\n");
@@ -90,7 +98,5 @@ bool checkWin(char player, char game[3][3])
 
     return false;
 }
-
-
 
 #endif

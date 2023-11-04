@@ -51,7 +51,7 @@ int main()
                 if (checkWin('X', game))
                 {
 
-                    printf("\n\n\n\t\t\t\t  O player 1 venceu o game!!\n\n\n");
+                    printf("\n\n\n\t\t\t\t  O player 1 venceu o jogo!!\n\n\n");
                     Sleep(1500);
                     win = 1;
                     break;
@@ -59,7 +59,7 @@ int main()
                 else if (checkWin('O', game))
                 {
 
-                    printf("\n\n\n\t\t\t\t  O player 2 venceu o game!!\n\n\n");
+                    printf("\n\n\n\t\t\t\t  O player 2 venceu o jogo!!\n\n\n");
                     Sleep(1500);
                     win = 1;
                     break;
