@@ -1,12 +1,12 @@
 #include "methods.h"
 
-int play_again = 1, win = 0;
+char play_again = 1;
+bool win = false;
 int player = 1, line, column, moves = 0;
 char game[3][3];
 
 int main()
 {
-    init(game);
     do
     {
         // monta a matriz
@@ -17,43 +17,36 @@ int main()
                 game[x][y] = ' ';
             }
         }
-        init(game);
+        drawBoard(game);
         do
         {
             clearScreen();
-            init(game);
-            printf("\n\nJogador %d digite a linha que deseja jogar: ", player);
-            scanf("%d", &line);
-            printf("Jogador %d digite a coluna que deseja jogar: ", player);
-            scanf("%d", &column);
+            drawBoard(game);
+            whereToPlay(&player, &line, &column);
 
-            fflush(stdin);
-            printf(" %d %d ", line, column);
-            line--;
-            column--;
-
-            if ((checkMove(line, column)) && (game[line][column] == ' '))
+            if ((checkMove(line - 1, column - 1, game)))
             {
 
                 clearScreen();
+
                 if (player == 1)
                 {
-                    game[line][column] = 'X';
-                    player++;
+                    game[line - 1][column - 1] = 'X';
+                    player = 2;
                 }
                 else
                 {
-                    game[line][column] = 'O';
+                    game[line - 1][column - 1] = 'O';
                     player = 1;
                 }
-                init(game);
+                drawBoard(game);
                 moves++;
                 if (checkWin('X', game))
                 {
 
                     printf("\n\n\n\t\t\t\t  O player 1 venceu o jogo!!\n\n\n");
                     Sleep(1500);
-                    win = 1;
+                    win = true;
                     break;
                 }
                 else if (checkWin('O', game))
@@ -61,7 +54,7 @@ int main()
 
                     printf("\n\n\n\t\t\t\t  O player 2 venceu o jogo!!\n\n\n");
                     Sleep(1500);
-                    win = 1;
+                    win = true;
                     break;
                 }
             }
@@ -70,18 +63,13 @@ int main()
             {
                 printf("\n \t\t\t\t  EMPATE!\n\n");
             }
-        } while (moves < 9 && win == 0);
+        } while (moves < 9 && !win);
 
-        printf("\t\tDigite 1 caso queira jogar novamente ou qualquer tecla para parar de jogar.\n");
-        scanf("%d", &play_again);
-        fflush(stdin);
+        playAgain(play_again);
+        moves = 0;
+        win = 0;
 
-        if (play_again != 1)
-        {
-            exit(1);
-        }
-
-    } while (play_again == 1);
+    } while (true);
 
     return 0;
 }

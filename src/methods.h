@@ -15,7 +15,7 @@ void clearScreen()
 #endif
 }
 
-void init(char game[3][3])
+void drawBoard(char game[3][3])
 {
     for (int l = 0; l < 3; l++)
     {
@@ -59,9 +59,9 @@ void init(char game[3][3])
     }
 }
 
-bool checkMove(int line, int column)
+bool checkMove(int line, int column, char game[3][3])
 {
-    if ((line < 3 && line >= 0) && (column < 3 && column >= 0))
+    if ((line < 3 && line >= 0) && (column < 3 && column >= 0) && (game[line][column] == ' '))
     {
         return true;
     }
@@ -97,6 +97,30 @@ bool checkWin(char player, char game[3][3])
     }
 
     return false;
+}
+
+void playAgain(char play_again)
+{
+
+    printf("\t\tDigite 1 caso queira jogar novamente ou qualquer tecla para parar de jogar.\n");
+    scanf("%c", &play_again);
+    fflush(stdin);
+
+    if (play_again != '1')
+    {
+        exit(EXIT_SUCCESS);
+    }
+}
+
+void whereToPlay(int *player, int *line, int *column)
+{
+    printf("\n\nJogador %d digite a linha que deseja jogar: ", *player);
+    scanf("%d", line);
+    printf("Jogador %d digite a coluna que deseja jogar: ", *player);
+    scanf("%d", column);
+
+    fflush(stdin);
+    printf(" %d %d ", *line, *column);
 }
 
 #endif
