@@ -66,8 +66,8 @@ int main()
         } while (moves < 9 && !win);
 
         playAgain(play_again);
-        moves = 0;
-        win = 0;
+        moves = 0; // reset moves
+        win = false;
 
     } while (true);
 
